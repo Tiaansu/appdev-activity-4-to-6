@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Activity 4 - 6 | Cabading, Marlon</title>
+        <script src="assets/jquery-3.7.1.min.js"></script>
+        <link rel="stylesheet" href="assets/style.css" />
+    </head>
+    <body>
+        <h1>1. Animate method</h1>
+        <button id="btn-name-animate">View name</button>
+        <button id="btn-name-reset">Reset</button>
+        <h1
+            id="name"
+            style="font-size: 50px; text-align: center; color: #d904bf"
+        >
+            Marlon R. Cabading
+        </h1>
+
+        <h2>2. ClearQueue method</h2>
+        <button id="btn-age-animate">View age</button>
+        <button id="btn-age-stop">Stop animation</button>
+        <h1
+            id="age"
+            style="font-size: 50px; text-align: center; color: #d904bf"
+        >
+            20 years old
+        </h1>
+
+        <h1>3. Delay method</h1>
+        <button id="btn-delay">View address</button>
+        <h1 style="text-align: center; color: #d904bf">
+            <span id="addr1" style="display: none">Phase 10 - A, </span>
+            <span id="addr2" style="display: none">Package 2, </span>
+            <span id="addr3" style="display: none">Block 36, </span>
+            <span id="addr4" style="display: none">Lot - 5, </span>
+            <span id="addr5" style="display: none">Bagong Silang, </span>
+            <span id="addr6" style="display: none">Caloocan City</span>
+        </h1>
+
+        <h1>4. Dequeue method</h1>
+        <button id="btn-dequeue">View course</button>
+        <h1
+            id="course"
+            style="text-align: center; font-size: 50px; color: #d904bf"
+        >
+            BSIT
+        </h1>
+
+        <h1>5. FadeIn method</h1>
+        <button id="btn-fadein">View section</button>
+        <h1 style="text-align: center; color: #d904bf">
+            <span id="sec1" style="display: none">M</span>
+            <span id="sec2" style="display: none">5</span>
+            <span id="sec3" style="display: none">1</span>
+        </h1>
+
+        <script>
+            $(document).ready(() => {
+                // Animate method
+                $('#btn-name-animate').click(() => {
+                    const name = $('#name');
+                    name.animate({
+                        fontSize: '125px',
+                        opacity: '0.2',
+                    }).css('color', '#ff0067');
+                });
+
+                $('#btn-name-reset').click(() => {
+                    const name = $('#name');
+                    name.animate({
+                        fontSize: '50px',
+                        opacity: '1',
+                    }).css('color', '#d904bf');
+                });
+
+                // ClearQueue method
+                $('#btn-age-animate').click(() => {
+                    const age = $('#age');
+                    age.animate({ fontSize: '45px' }, 100);
+                    age.animate({ fontSize: '40px' }, 150);
+                    age.animate({ fontSize: '35px' }, 200);
+                    age.animate({ fontSize: '30px' }, 250);
+                    age.animate({ fontSize: '25px' }, 300);
+                    age.animate({ fontSize: '20px' }, 350);
+                });
+
+                $('#btn-age-stop').click(() => {
+                    $('#age').clearQueue();
+                });
+
+                // Delay method
+                $('#btn-delay').click(() => {
+                    for (let i = 1; i <= 6; i++) {
+                        $(`#addr${i}`)
+                            .delay(250 * i)
+                            .fadeIn();
+                    }
+                });
+
+                // Dequeue method
+                $('#btn-dequeue').click(() => {
+                    const course = $('#course');
+                    course.queue(() => {
+                        course.css('color', '#ff0067');
+                        course.dequeue();
+                    });
+                    course.animate({ fontSize: 75 }, 'slow');
+                    course.animate({ fontSize: 100 }, 'slow');
+                    course.animate({ fontSize: 125 }, 'slow');
+                    course.queue(() => {
+                        course.css('color', '#d904bf');
+                        course.dequeue();
+                    });
+                    course.animate({ fontSize: 100 }, 'slow');
+                    course.animate({ fontSize: 75 }, 'slow');
+                    course.animate({ fontSize: 50 }, 'slow');
+                });
+
+                $('#btn-fadein').click(() => {
+                    for (let i = 1; i <= 3; i++) {
+                        $(`#sec${i}`).fadeIn(2000 + i * 1000);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
